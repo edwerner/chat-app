@@ -24,19 +24,11 @@ public class Gui {
 		return button;
 	}
 
-	public Button getGameSignoutButton() {
+	public Button getSignoutButton() {
 		button = new Button();
 		button.setButtonClass("btn btn-warning margin-10");
 		button.setButtonType("submit");
 		button.setButtonText("Signout");
-		return button;
-	}
-
-	public Button getSelectButton() {
-		button = new Button();
-		button.setButtonClass("btn btn-lg btn-primary btn-block");
-		button.setButtonType("submit");
-		button.setButtonText("Select");
 		return button;
 	}
 

@@ -17,7 +17,7 @@ public class WebServer {
 	public static final String GET_SIGNUP_URL = "/signup";
 	public static final String POST_SIGNUP_URL = "/signup";
 	public static final String POST_SIGNOUT_URL = "/";
-	public static final String POST_MESSAGE_URL = "/list";
+	public static final String POST_MESSAGE_URL = "/chat";
 
 	private final TemplateEngine templateEngine;
 
