@@ -58,13 +58,14 @@ public class PostSignupController implements TemplateViewRoute {
 		boolean newUserSignup;
 		boolean signInPage;
 
-		User account = new User();
-		account.setUsername(username);
-		account.setPassword(password);
-		Account existingUser = playerService.findPlayer(account);
+		Account user = new User();
+		user.setUsername(username);
+		user.setPassword(password);
+		user.setAccountType("user");
+		Account existingUser = playerService.findPlayer(user);
 
 		if (existingUser == null) {
-			playerService.savePlayer(account);
+			playerService.savePlayer(user);
 			signupStatus = false;
 			newUserSignup = true;
 			signInPage = true;

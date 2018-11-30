@@ -4,6 +4,6 @@ import com.chat.model.Account;
 
 public interface UserDao {
 	Account findPlayerByUsername(String username);
-	void savePlayer(Account player);
-	boolean passwordsMatch(Account player);
+	boolean passwordsMatch(Account user);
+	void saveUser(Account user);
 }

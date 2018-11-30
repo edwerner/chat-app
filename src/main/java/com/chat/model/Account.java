@@ -5,4 +5,6 @@ public interface Account {
 	void setUsername(String username);
 	String getPassword();
 	void setPassword(String password);
+	String getAccountType();
+	void setAccountType(String accountType);
 }

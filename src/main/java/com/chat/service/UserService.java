@@ -13,8 +13,8 @@ public class UserService {
 		userDaoImpl = new UserDaoImpl();
 	}
 
-	public void savePlayer(Account player) {
-		userDaoImpl.savePlayer(player);
+	public void savePlayer(Account user) {
+		userDaoImpl.saveUser(user);
 	}
 
 	public Account findPlayer(Account player) {

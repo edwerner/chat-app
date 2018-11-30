@@ -1,6 +1,6 @@
 package com.chat.model;
 
-public class User implements Account {
+public class Admin implements Account {
 
 	private String username;
 	private String password;

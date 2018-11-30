@@ -19,12 +19,13 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void savePlayer(Account player) {
+	public void saveUser(Account user) {
 		try {
 			JsonObject playerObject = new JsonObject();
 			JsonObject attributesObject = new JsonObject();
-			attributesObject.addProperty("username", player.getUsername());
-			attributesObject.addProperty("password", player.getPassword());
+			attributesObject.addProperty("username", user.getUsername());
+			attributesObject.addProperty("password", user.getPassword());
+			attributesObject.addProperty("accountType", user.getAccountType());
 			playerObject.add("user", attributesObject);
 			BufferedWriter outputStream = new BufferedWriter(new FileWriter(USER_FILE_LOCATION, true));
 			outputStream.write(JsonUtils.toJson(playerObject));
