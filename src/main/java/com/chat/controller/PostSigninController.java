@@ -1,7 +1,7 @@
 package com.chat.controller;
 
 import com.chat.model.*;
-import com.chat.service.PlayerService;
+import com.chat.service.UserService;
 
 import spark.ModelAndView;
 import spark.Request;
@@ -21,17 +21,17 @@ public class PostSigninController implements TemplateViewRoute {
 	static final String PASSWORD = "inputPassword";
 	static final String INVALID_LOGIN_MESSAGE = "Incorrect Username/Password";
 
-	private PlayerService playerService;
-	private GuiController guiController;
+	private UserService playerService;
+	private Gui gui;
 	private String viewName;
 
 	public PostSigninController() {
 		try {
-			playerService = new PlayerService();
+			playerService = new UserService();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		guiController = new GuiController();
+		gui = new Gui();
 	}
 
 	@Override
@@ -42,23 +42,24 @@ public class PostSigninController implements TemplateViewRoute {
 		final String username = request.queryParams(USER_NAME);
 		final String password = request.queryParams(PASSWORD);
 
-		Account account = new Account();
-		account.setUsername(username);
-		account.setPassword(password);
+		Account user = new User();
+		user.setUsername(username);
+		user.setPassword(password);
 
-		final boolean loggedIn = playerService.authenticate(account);
+		final boolean loggedIn = playerService.authenticate(user);
 
 		if (loggedIn) {
 			Session session = request.session();
-			session.attribute("account", account);
-			Button button = guiController.getSelectButton();
+			session.attribute("user", user);
+			session.maxInactiveInterval(10);
+			Button button = gui.getSelectButton();
 			vm.put(HomeController.BUTTON_CLASS, button.getButtonClass());
 			vm.put(HomeController.BUTTON_TYPE, button.getButtonType());
 			vm.put(HomeController.BUTTON_TEXT, button.getButtonText());
 			vm.put(HomeController.TITLE_ATTRIBUTE, HomeController.TITLE);
 			viewName = CHAT_VIEW_NAME;
 		} else {
-			Button button = new GuiController().getHomeSigninButton();
+			Button button = new Gui().getHomeSigninButton();
 			vm.put(HomeController.BUTTON_CLASS, button.getButtonClass());
 			vm.put(HomeController.BUTTON_TYPE, button.getButtonType());
 			vm.put(HomeController.BUTTON_TEXT, button.getButtonText());

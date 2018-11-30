@@ -1,6 +1,7 @@
 package com.chat.controller;
 
 import com.chat.model.Button;
+import com.chat.model.Gui;
 
 import spark.ModelAndView;
 import spark.Request;
@@ -11,16 +12,16 @@ import java.util.Map;
 
 public class SignupController implements TemplateViewRoute {
 
-	private GuiController guiController;
+	private Gui gui;
 
 	public SignupController() {
-		guiController = new GuiController();
+		gui = new Gui();
 	}
 
 	@Override
 	public ModelAndView handle(Request request, Response response) {
 		Map<String, Object> vm = new HashMap<>();
-		Button button = guiController.getHomeSignupButton();
+		Button button = gui.getHomeSignupButton();
 		vm.put(HomeController.BUTTON_CLASS, button.getButtonClass());
 		vm.put(HomeController.BUTTON_TYPE, button.getButtonType());
 		vm.put(HomeController.BUTTON_TEXT, button.getButtonText());

@@ -1,9 +1,10 @@
 package com.chat.controller;
 
-import com.chat.model.Account;
-import com.chat.model.Button;
 import com.chat.model.User;
-import com.chat.service.PlayerService;
+import com.chat.model.Button;
+import com.chat.model.Gui;
+import com.chat.model.Account;
+import com.chat.service.UserService;
 
 import spark.ModelAndView;
 import spark.Request;
@@ -26,16 +27,16 @@ public class PostSignupController implements TemplateViewRoute {
 	static final String SIGNUP_SUCCESS_MESSAGE = "You have successfully signed up.";
 	static final String SIGNUP_FAILURE_MESSAGE = "Username is taken. Try again.";
 	static final String SIGNUP_FAIL_MESSAGE = "Error while signing up.";
-	private GuiController guiController;
-	private PlayerService playerService;
+	private Gui gui;
+	private UserService playerService;
 
 	public PostSignupController() {
 		try {
-			playerService = new PlayerService();
+			playerService = new UserService();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		guiController = new GuiController();
+		gui = new Gui();
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class PostSignupController implements TemplateViewRoute {
 
 		Map<String, Object> vm = new HashMap<>();
 		try {
-			playerService = new PlayerService();
+			playerService = new UserService();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -57,10 +58,10 @@ public class PostSignupController implements TemplateViewRoute {
 		boolean newUserSignup;
 		boolean signInPage;
 
-		Account account = new Account();
+		User account = new User();
 		account.setUsername(username);
 		account.setPassword(password);
-		User existingUser = playerService.findPlayer(account);
+		Account existingUser = playerService.findPlayer(account);
 
 		if (existingUser == null) {
 			playerService.savePlayer(account);
@@ -75,7 +76,7 @@ public class PostSignupController implements TemplateViewRoute {
 			signupMessage = SIGNUP_FAILURE_MESSAGE;
 		}
 
-		Button button = guiController.getHomeSigninButton();
+		Button button = gui.getHomeSigninButton();
 		vm.put(HomeController.BUTTON_CLASS, button.getButtonClass());
 		vm.put(HomeController.BUTTON_TYPE, button.getButtonType());
 		vm.put(HomeController.BUTTON_TEXT, button.getButtonText());

@@ -2,7 +2,7 @@ package com.chat.controller;
 
 import spark.ResponseTransformer;
 
-import com.chat.model.Account;
+import com.chat.model.User;
 import com.google.gson.Gson;
 
 public class JsonUtils {
@@ -21,11 +21,11 @@ public class JsonUtils {
 		return JsonUtils::toJson;
 	}
 
-	public static Account fromPlayerJson(final String json, Class<Account> user) {
+	public static User fromPlayerJson(final String json, Class<User> user) {
 		return GSON.fromJson(json, user);
 	}
 
-	public static Account fromPlayerStatusJson(final String json, Class<Account> user) {
+	public static User fromPlayerStatusJson(final String json, Class<User> user) {
 		return GSON.fromJson(json, user);
 	}
 }

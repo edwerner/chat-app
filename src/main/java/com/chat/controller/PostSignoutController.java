@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.chat.model.Button;
-import com.chat.service.PlayerService;
+import com.chat.model.Gui;
+import com.chat.service.UserService;
 
 import spark.ModelAndView;
 import spark.Request;
@@ -26,17 +27,17 @@ public class PostSignoutController implements TemplateViewRoute {
 	static final String LOGIN_PAGE = "signinPage";
 	static final String NEW_USER = "newUserSignup";
 	static final String SIGNUP_MESSAGE = "SignUpMessage";
-	private GuiController guiController;
+	private Gui gui;
 	@SuppressWarnings("unused")
-	private PlayerService playerService;
+	private UserService playerService;
 
 	public PostSignoutController() {
 		try {
-			playerService = new PlayerService();
+			playerService = new UserService();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		guiController = new GuiController();
+		gui = new Gui();
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class PostSignoutController implements TemplateViewRoute {
 		// Account account = session.attribute("user");
 		session.attribute("user", null);
 		Map<String, Object> vm = new HashMap<>();
-		Button button = guiController.getHomeSigninButton();
+		Button button = gui.getHomeSigninButton();
 		vm.put(BUTTON_CLASS, button.getButtonClass());
 		vm.put(BUTTON_TYPE, button.getButtonType());
 		vm.put(BUTTON_TEXT, button.getButtonText());

@@ -1,57 +1,56 @@
 package com.chat.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.chat.model.Button;
 import com.chat.model.Gui;
+import com.chat.service.UserService;
 
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import spark.Session;
 import spark.TemplateViewRoute;
 
-public class HomeController implements TemplateViewRoute {
+public class PostMessageController implements TemplateViewRoute {
 
-	public static final String HOME_VIEW_NAME = "home.ftl";
-	static final String TITLE = "Chat App";
+	static final String TITLE = "List App";
+	final String CHAT_VIEW_NAME = "chat.ftl";
 	static final String TITLE_ATTRIBUTE = "title";
 	static final String BUTTON_CLASS = "buttonClass";
 	static final String BUTTON_TYPE = "buttonType";
 	static final String BUTTON_TEXT = "buttonText";
 	static final String LOGIN_STATUS = "loginFail";
 	static final String SIGNUP_STATUS = "signupFail";
-	public static final String LOGIN_MESSAGE = "message";
+	static final String LOGIN_MESSAGE = "message";
 	static final String LOGIN_PAGE = "signinPage";
 	static final String NEW_USER = "newUserSignup";
 	static final String SIGNUP_MESSAGE = "SignUpMessage";
 	private Gui gui;
+	@SuppressWarnings("unused")
+	private UserService playerService;
 
-	public HomeController() {
+	public PostMessageController() {
+		try {
+			playerService = new UserService();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		gui = new Gui();
 	}
 
-	/**
-	 * Model and view handler
-	 * 
-	 * @param request
-	 * @param response
-	 * @return new model and view
-	 */
 	@Override
 	public ModelAndView handle(Request request, Response response) {
+		Session session = request.session();
+		session.attribute("user", null);
 		Map<String, Object> vm = new HashMap<>();
 		Button button = gui.getHomeSigninButton();
 		vm.put(BUTTON_CLASS, button.getButtonClass());
 		vm.put(BUTTON_TYPE, button.getButtonType());
 		vm.put(BUTTON_TEXT, button.getButtonText());
 		vm.put(TITLE_ATTRIBUTE, TITLE);
-		vm.put(LOGIN_STATUS, false);
-		vm.put(SIGNUP_STATUS, false);
-		vm.put(LOGIN_MESSAGE, "Welcome");
-		vm.put(LOGIN_PAGE, true);
-		vm.put(NEW_USER, false);
-		vm.put(SIGNUP_MESSAGE, false);
-		return new ModelAndView(vm, HOME_VIEW_NAME);
+		return new ModelAndView(vm, CHAT_VIEW_NAME);
 	}
 }

@@ -118,6 +118,10 @@ form.home-form {
 	width: 100%;
 }
 
+div.todo_form {
+	width: 100%
+}
+
 input{
   text-indent: 10px;
   margin-bottom: 10px;

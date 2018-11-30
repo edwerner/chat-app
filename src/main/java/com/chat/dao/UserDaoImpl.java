@@ -5,28 +5,28 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.chat.controller.JsonUtils;
-import com.chat.model.Account;
 import com.chat.model.User;
+import com.chat.model.Account;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class UserDaoImpl implements UserDao {
-	private final String PLAYER_FILE_LOCATION = "database/players.txt";
+	private final String USER_FILE_LOCATION = "database/users.txt";
 
 	public UserDaoImpl() throws IOException {
-		File playerFile = new File(PLAYER_FILE_LOCATION);
+		File playerFile = new File(USER_FILE_LOCATION);
 		playerFile.createNewFile();
 	}
 
 	@Override
-	public void savePlayer(User player) {
+	public void savePlayer(Account player) {
 		try {
 			JsonObject playerObject = new JsonObject();
 			JsonObject attributesObject = new JsonObject();
 			attributesObject.addProperty("username", player.getUsername());
 			attributesObject.addProperty("password", player.getPassword());
 			playerObject.add("user", attributesObject);
-			BufferedWriter outputStream = new BufferedWriter(new FileWriter(PLAYER_FILE_LOCATION, true));
+			BufferedWriter outputStream = new BufferedWriter(new FileWriter(USER_FILE_LOCATION, true));
 			outputStream.write(JsonUtils.toJson(playerObject));
 			outputStream.newLine();
 			outputStream.close();
@@ -36,11 +36,11 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User findPlayerByUsername(String username) {
-		Account player = null;
-		Account existingPlayer = null;
+	public Account findPlayerByUsername(String username) {
+		User player = null;
+		User existingPlayer = null;
 		JsonObject parserObject;
-		String fileName = PLAYER_FILE_LOCATION;
+		String fileName = USER_FILE_LOCATION;
 		String line = null;
 
 		try {
@@ -49,9 +49,9 @@ public class UserDaoImpl implements UserDao {
 
 			while ((line = bufferedReader.readLine()) != null) {
 				parserObject = (JsonObject) new JsonParser().parse(line);
-				JsonObject playerObject = parserObject.getAsJsonObject("player");
+				JsonObject playerObject = parserObject.getAsJsonObject("user");
 				String json = JsonUtils.toJson(playerObject);
-				player = JsonUtils.fromPlayerJson(json, Account.class);
+				player = JsonUtils.fromPlayerJson(json, User.class);
 				if (player != null) {
 					if (player.getUsername().equals(username)) {
 						existingPlayer = player;
@@ -66,14 +66,14 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public boolean passwordsMatch(User player) {
-		Account existingPlayer = null;
+	public boolean passwordsMatch(Account player) {
+		User existingPlayer = null;
 		boolean passwordsMatch = false;
 		JsonObject parserObject;
 		String line = null;
 
 		try {
-			FileReader fileReader = new FileReader(PLAYER_FILE_LOCATION);
+			FileReader fileReader = new FileReader(USER_FILE_LOCATION);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
 			Pattern p = Pattern.compile(Pattern.quote(player.getPassword())); // quotes in case you need 'Hello.'
@@ -82,9 +82,9 @@ public class UserDaoImpl implements UserDao {
 			while ((line = bufferedReader.readLine()) != null)
 				for (Matcher m = p.matcher(line); m.find(); count++) {
 					parserObject = (JsonObject) new JsonParser().parse(line);
-					JsonObject playerObject = parserObject.getAsJsonObject("player");
+					JsonObject playerObject = parserObject.getAsJsonObject("user");
 					String json = JsonUtils.toJson(playerObject);
-					existingPlayer = JsonUtils.fromPlayerJson(json, Account.class);
+					existingPlayer = JsonUtils.fromPlayerJson(json, User.class);
 					if (existingPlayer != null) {
 						if (existingPlayer.getUsername().equals(player.getUsername())
 								&& existingPlayer.getPassword().equals(player.getPassword())) {

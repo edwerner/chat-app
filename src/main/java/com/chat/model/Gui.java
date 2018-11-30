@@ -1,12 +1,10 @@
-package com.chat.controller;
+package com.chat.model;
 
-import com.chat.model.Button;
-
-public class GuiController {
+public class Gui {
 
 	private Button button;
 
-	public GuiController() {
+	public Gui() {
 
 	}
 
@@ -39,6 +37,14 @@ public class GuiController {
 		button.setButtonClass("btn btn-lg btn-primary btn-block");
 		button.setButtonType("submit");
 		button.setButtonText("Select");
+		return button;
+	}
+
+	public Button getSendMessageButton() {
+		button = new Button();
+		button.setButtonClass("btn btn-lg btn-success btn-block");
+		button.setButtonType("submit");
+		button.setButtonText("Send");
 		return button;
 	}
 }

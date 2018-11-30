@@ -1,9 +1,9 @@
 package com.chat.dao;
 
-import com.chat.model.User;
+import com.chat.model.Account;
 
 public interface UserDao {
-	User findPlayerByUsername(String username);
-	void savePlayer(User player);
-	boolean passwordsMatch(User player);
+	Account findPlayerByUsername(String username);
+	void savePlayer(Account player);
+	boolean passwordsMatch(Account player);
 }

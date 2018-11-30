@@ -15,6 +15,8 @@
 			</div>
 			<div class="todo-form flex flex-column flex-center">
 				<h1>Chat Room</h1>
+				
+				<#include "messageform.ftl">
 			</div>
 		</div>
 	</div>
