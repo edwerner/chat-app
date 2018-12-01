@@ -2,6 +2,7 @@ package com.chat.controller;
 
 import spark.ResponseTransformer;
 
+import com.chat.model.Message;
 import com.chat.model.User;
 import com.google.gson.Gson;
 
@@ -25,7 +26,7 @@ public class JsonUtils {
 		return GSON.fromJson(json, user);
 	}
 
-	public static User fromPlayerStatusJson(final String json, Class<User> user) {
-		return GSON.fromJson(json, user);
+	public static Message fromMessageJson(final String json, Class<Message> message) {
+		return GSON.fromJson(json, message);
 	}
 }

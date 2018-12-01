@@ -1,5 +1,6 @@
 package com.chat.controller;
 
+import com.chat.dao.MessageDaoImpl;
 import com.chat.model.*;
 import com.chat.service.UserService;
 
@@ -10,6 +11,7 @@ import spark.Session;
 import spark.TemplateViewRoute;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,13 +22,16 @@ public class PostSigninController implements TemplateViewRoute {
 	static final String USER_NAME = "inputUsername";
 	static final String PASSWORD = "inputPassword";
 	static final String INVALID_LOGIN_MESSAGE = "Incorrect Username/Password";
-
+	private MessageDaoImpl messageDaoImpl;
+	public ArrayList<Message> messages = new ArrayList<Message>();
+	static final String MESSAGES = "messages";
 	private UserService playerService;
 	private Gui gui;
 	private String viewName;
 
 	public PostSigninController() {
 		try {
+			messageDaoImpl = new MessageDaoImpl();
 			playerService = new UserService();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -49,6 +54,7 @@ public class PostSigninController implements TemplateViewRoute {
 		final boolean loggedIn = playerService.authenticate(user);
 
 		if (loggedIn) {
+			messages = messageDaoImpl.getMessages();
 			Session session = request.session();
 			session.attribute("user", user);
 			session.maxInactiveInterval(10);
@@ -57,6 +63,7 @@ public class PostSigninController implements TemplateViewRoute {
 			vm.put(HomeController.BUTTON_TYPE, button.getButtonType());
 			vm.put(HomeController.BUTTON_TEXT, button.getButtonText());
 			vm.put(HomeController.TITLE_ATTRIBUTE, HomeController.TITLE);
+			vm.put(MESSAGES, messages);
 			viewName = CHAT_VIEW_NAME;
 		} else {
 			Button button = new Gui().getHomeSigninButton();

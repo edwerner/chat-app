@@ -15,7 +15,11 @@
 			</div>
 			<div class="todo-form flex flex-column flex-center">
 				<h1>Chat Room</h1>
-				
+				<#if messages??>
+					<#list messages as message>
+						<p>${message.getMessage()}</p>
+					</#list>
+				</#if>
 				<#include "messageform.ftl">
 			</div>
 		</div>
