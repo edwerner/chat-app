@@ -4,24 +4,28 @@
 	<title>${title}</title>
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	<link rel="stylesheet" type="text/css" href="/css/flex.css">
+	<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/flex.css"/>
 </head>
 <body>
-	<div class="chat flex flex-row flex-center">
-		<div class="content flex flex-column flex-center">
-			<div class="logo-content">
+	<div class="chat flex flex-column">
+		<div class="header flex flex-row">
+			<div class="chat-logo-content">
 				<img src="../img/chat.png" />
+				<span class="headline">Chat Room</span>
 			</div>
-			<div class="todo-form flex flex-column flex-center">
-				<h1>Chat Room</h1>
+		</div>
+		<div class="chat-content flex flex-column flex-center">
+			<div class="messages flex flex-column">
 				<#if messages??>
 					<#list messages as message>
 						<p>${message.getMessage()}</p>
 					</#list>
 				</#if>
-				<#include "messageform.ftl">
 			</div>
+		</div>
+		<div class="chatbar flex flex-end">
+			<#include "messageform.ftl">
 		</div>
 	</div>
 </body>

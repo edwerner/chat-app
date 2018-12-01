@@ -76,8 +76,28 @@ div.info {
     font-size: 13px;
 }
 
+div.header {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+span.headline {
+    font-size: 20px;
+    font-weight: bold;
+}
+
 div.home, div.chat {
 	height: 100%;
+}
+
+div.chat {
+    overflow: hidden;
+    margin: 0px;
+}
+
+div.chatbar {
+    padding: 20px;
 }
 
 h1.home-title {
@@ -106,6 +126,10 @@ div.logo-content {
     margin-bottom: 20px;
 }
 
+div.chat-logo-content img {
+    height: 50px;
+}
+
 div.login-form {
 	width: 400px;
 }
@@ -114,12 +138,15 @@ div.list-form {
     width: 600px;
 }
 
-form.home-form {
+form.home-form, form.message-form {
 	width: 100%;
 }
 
-div.todo-form {
-	width: 100%
+div.messages {
+	width: 100%;
+    height: 400px;
+    overflow-y: scroll;
+    padding: 20px;
 }
 
 input{
