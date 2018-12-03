@@ -49,8 +49,8 @@ public class GetMessageController implements TemplateViewRoute {
 		boolean admin = false;
 		System.out.println("ACCOUNT TYPE: " + user.getAccountType());
 		
-		if (user != null) {
-			if (user.getAccountType() == "admin") {
+		if (user.getAccountType() != null) {
+			if (user.getAccountType().equals("admin")) {
 				admin = true;
 			}
 			messages = messageDaoImpl.getMessages();

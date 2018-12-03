@@ -60,7 +60,7 @@ public class PostMessageController implements TemplateViewRoute {
 			vm.put(HomeController.SIGNUP_MESSAGE, null);
 			viewName = HomeController.HOME_VIEW_NAME;
 		} else {
-			if (user.getAccountType() == "admin") {
+			if (user.getAccountType().equals("admin")) {
 				admin = true;
 			}
 			Button button = gui.getSendMessageButton();
