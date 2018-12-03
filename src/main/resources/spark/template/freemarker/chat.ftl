@@ -15,12 +15,20 @@
 				<span class="headline">Chat Room</span>
 			</div>
 		</div>
-		<div class="chat-content flex flex-column flex-center">
-			<div class="messages flex flex-column">
-				<#if messages??>
-					<#list messages as message>
-						<p>${message.getMessage()}</p>
-					</#list>
+		<div class="chat-content flex flex-column flex-start">
+			<div class="messages">
+				<#if admin??>
+					<#if messages??>
+						<#list messages as message>
+							<div class="flex flex-start message admin-message">${message.getMessage()}</div>
+						</#list>
+					</#if>
+				<#else>
+					<#if messages??>
+						<#list messages as message>
+							<div class="flex flex-start message">${message.getMessage()}</div>
+						</#list>
+					</#if>
 				</#if>
 			</div>
 		</div>

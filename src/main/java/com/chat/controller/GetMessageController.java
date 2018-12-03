@@ -15,14 +15,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PostSigninController implements TemplateViewRoute {
+public class GetMessageController implements TemplateViewRoute {
 
 	final String CHAT_VIEW_NAME = "chat.ftl";
 	final String LOGIN_VIEW_NAME = "home.ftl";
 	static final String USER_NAME = "inputUsername";
-	static final String ADMIN = "admin";
 	static final String PASSWORD = "inputPassword";
-	static final String INVALID_LOGIN_MESSAGE = "Incorrect Username/Password";
+	static final String INVALID_LOGIN_MESSAGE = "You must be logged in to continue";
 	private MessageDaoImpl messageDaoImpl;
 	public ArrayList<Message> messages = new ArrayList<Message>();
 	static final String MESSAGES = "messages";
@@ -30,7 +29,7 @@ public class PostSigninController implements TemplateViewRoute {
 	private Gui gui;
 	private String viewName;
 
-	public PostSigninController() {
+	public GetMessageController() {
 		try {
 			messageDaoImpl = new MessageDaoImpl();
 			playerService = new UserService();
@@ -45,28 +44,17 @@ public class PostSigninController implements TemplateViewRoute {
 
 		Map<String, Object> vm = new HashMap<>();
 
-		final String username = request.queryParams(USER_NAME);
-		final String password = request.queryParams(PASSWORD);
+		Session session = request.session();
+		final User user = session.attribute("user");
 
-		Account user = new User();
-		user.setUsername(username);
-		user.setPassword(password);
-
-		final boolean loggedIn = playerService.authenticate(user);
-		boolean admin = false;
-
-		if (loggedIn) {
+		if (user != null) {
 			messages = messageDaoImpl.getMessages();
-			Session session = request.session();
-			session.attribute("user", user);
-			session.maxInactiveInterval(10);
 			Button button = gui.getSendMessageButton();
 			vm.put(HomeController.BUTTON_CLASS, button.getButtonClass());
 			vm.put(HomeController.BUTTON_TYPE, button.getButtonType());
 			vm.put(HomeController.BUTTON_TEXT, button.getButtonText());
 			vm.put(HomeController.TITLE_ATTRIBUTE, HomeController.TITLE);
 			vm.put(MESSAGES, messages);
-			vm.put(ADMIN, admin);
 			viewName = CHAT_VIEW_NAME;
 		} else {
 			Button button = new Gui().getHomeSigninButton();
