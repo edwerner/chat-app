@@ -54,13 +54,18 @@ public class PostSigninController implements TemplateViewRoute {
 
 		final boolean loggedIn = playerService.authenticate(user);
 		boolean admin = false;
-
+		
+		final Account existingUser = playerService.findPlayer(user);
+		
 		if (loggedIn) {
-			if (user.getAccountType() == "admin") {
+			if (existingUser.getAccountType() == "admin") {
 				admin = true;
 			}
+
+			System.out.println("ACCOUNT TYPE: " + existingUser.getAccountType());
 			messages = messageDaoImpl.getMessages();
 			Session session = request.session();
+			user.setAccountType(existingUser.getAccountType());
 			session.attribute("user", user);
 			session.maxInactiveInterval(10);
 			Button button = gui.getSendMessageButton();

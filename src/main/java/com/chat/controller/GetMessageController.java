@@ -45,7 +45,9 @@ public class GetMessageController implements TemplateViewRoute {
 
 		Session session = request.session();
 		final User user = session.attribute("user");
+		
 		boolean admin = false;
+		System.out.println("ACCOUNT TYPE: " + user.getAccountType());
 		
 		if (user != null) {
 			if (user.getAccountType() == "admin") {

@@ -24,6 +24,7 @@ public class PostMessageController implements TemplateViewRoute {
 	static final String MESSAGE = "inputMessage";
 	static final String INVALID_LOGIN_MESSAGE = "Incorrect Username/Password";
 	static final String MESSAGES = "messages";
+	static final String ADMIN = "admin";
 	private Gui gui;
 	private String viewName;
 	private MessageDaoImpl messageDaoImpl;
@@ -43,7 +44,8 @@ public class PostMessageController implements TemplateViewRoute {
 
 		Session session = request.session();
 		final User user = session.attribute("user");
-
+		boolean admin = false;
+		
 		if (user == null) {
 			Button button = gui.getHomeSigninButton();
 			vm.put(HomeController.BUTTON_CLASS, button.getButtonClass());
@@ -58,6 +60,9 @@ public class PostMessageController implements TemplateViewRoute {
 			vm.put(HomeController.SIGNUP_MESSAGE, null);
 			viewName = HomeController.HOME_VIEW_NAME;
 		} else {
+			if (user.getAccountType() == "admin") {
+				admin = true;
+			}
 			Button button = gui.getSendMessageButton();
 			final String messageString = request.queryParams(MESSAGE);
 			Message message = new Message();
@@ -82,6 +87,7 @@ public class PostMessageController implements TemplateViewRoute {
 			vm.put(HomeController.SIGNUP_STATUS, false);
 			vm.put(HomeController.SIGNUP_MESSAGE, null);
 			vm.put(MESSAGES, messages);
+			vm.put(ADMIN, admin);
 			viewName = CHAT_VIEW_NAME;
 		}
 		return new ModelAndView(vm, viewName);

@@ -17,7 +17,7 @@
 		</div>
 		<div class="chat-content flex flex-column flex-start">
 			<div class="messages">
-				<#if admin??>
+				<#if admin>
 					<#if messages??>
 						<#list messages as message>
 							<div class="alert alert-danger flex flex-start message admin-message" role="alert">
