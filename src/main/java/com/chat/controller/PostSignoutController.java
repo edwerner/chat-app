@@ -43,7 +43,6 @@ public class PostSignoutController implements TemplateViewRoute {
 	@Override
 	public ModelAndView handle(Request request, Response response) {
 		Session session = request.session();
-		// Account account = session.attribute("user");
 		session.attribute("user", null);
 		Map<String, Object> vm = new HashMap<>();
 		Button button = gui.getHomeSigninButton();

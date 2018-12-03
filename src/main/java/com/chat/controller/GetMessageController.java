@@ -63,7 +63,7 @@ public class GetMessageController implements TemplateViewRoute {
 			vm.put(ADMIN, admin);
 			viewName = CHAT_VIEW_NAME;
 		} else {
-			Button button = new Gui().getHomeSigninButton();
+			Button button = gui.getHomeSigninButton();
 			vm.put(HomeController.BUTTON_CLASS, button.getButtonClass());
 			vm.put(HomeController.BUTTON_TYPE, button.getButtonType());
 			vm.put(HomeController.BUTTON_TEXT, button.getButtonText());

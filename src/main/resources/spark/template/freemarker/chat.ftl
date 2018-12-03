@@ -14,6 +14,9 @@
 				<img src="../img/chat.png" />
 				<span class="headline">Chat Room</span>
 			</div>
+			<div class="logout-button">
+				<#include "signoutform.ftl">
+			</div>
 		</div>
 		<div class="chat-content flex flex-column flex-start">
 			<div class="messages">

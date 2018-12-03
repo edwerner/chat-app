@@ -1,3 +1,3 @@
 <form class="form logout-form" action="/" method="POST">
-	<#include "button.ftl">
-</form>
+<button class="btn btn-warning margin-10" type="submit">Signout</button>
+</form> 

@@ -151,6 +151,11 @@ form.home-form, form.message-form {
 	width: 100%;
 }
 
+form.logout-form {
+    position: absolute;
+    right: 20px;
+}
+
 div.messages {
 	width: 100%;
     height: 400px;
