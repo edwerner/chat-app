@@ -22,17 +22,16 @@ public class GetMessageController implements TemplateViewRoute {
 	static final String USER_NAME = "inputUsername";
 	static final String PASSWORD = "inputPassword";
 	static final String INVALID_LOGIN_MESSAGE = "You must be logged in to continue";
+	static final String ADMIN = "admin";
 	private MessageDaoImpl messageDaoImpl;
 	public ArrayList<Message> messages = new ArrayList<Message>();
 	static final String MESSAGES = "messages";
-	private UserService playerService;
 	private Gui gui;
 	private String viewName;
 
 	public GetMessageController() {
 		try {
 			messageDaoImpl = new MessageDaoImpl();
-			playerService = new UserService();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -46,8 +45,12 @@ public class GetMessageController implements TemplateViewRoute {
 
 		Session session = request.session();
 		final User user = session.attribute("user");
-
+		boolean admin = false;
+		
 		if (user != null) {
+			if (user.getAccountType() == "admin") {
+				admin = true;
+			}
 			messages = messageDaoImpl.getMessages();
 			Button button = gui.getSendMessageButton();
 			vm.put(HomeController.BUTTON_CLASS, button.getButtonClass());
@@ -55,6 +58,7 @@ public class GetMessageController implements TemplateViewRoute {
 			vm.put(HomeController.BUTTON_TEXT, button.getButtonText());
 			vm.put(HomeController.TITLE_ATTRIBUTE, HomeController.TITLE);
 			vm.put(MESSAGES, messages);
+			vm.put(ADMIN, admin);
 			viewName = CHAT_VIEW_NAME;
 		} else {
 			Button button = new Gui().getHomeSigninButton();

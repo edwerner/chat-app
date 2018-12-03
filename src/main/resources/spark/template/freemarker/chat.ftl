@@ -20,7 +20,18 @@
 				<#if admin??>
 					<#if messages??>
 						<#list messages as message>
-							<div class="flex flex-start message admin-message">${message.getMessage()}</div>
+							<div class="alert alert-danger flex flex-start message admin-message" role="alert">
+								<div class="flex flex-start">
+									${message.getMessage()}
+								</div>
+								<div class="flex flex-end">
+									<div class="remove-message-text">Remove message</div>
+									<button type="button" class="flex flex-end close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true"> &times;</span>
+									</button>
+								</div>
+							</div>
+							<div class=""></div>
 						</#list>
 					</#if>
 				<#else>

@@ -84,7 +84,16 @@ div.header {
 
 span.headline {
     font-size: 20px;
-    font-weight: bold;
+}
+
+button.close {
+    position: absolute;
+    right: 40px;
+}
+
+div.remove-message-text {
+    position: absolute;
+    right: 60px;
 }
 
 div.home, div.chat {

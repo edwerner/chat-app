@@ -56,6 +56,9 @@ public class PostSigninController implements TemplateViewRoute {
 		boolean admin = false;
 
 		if (loggedIn) {
+			if (user.getAccountType() == "admin") {
+				admin = true;
+			}
 			messages = messageDaoImpl.getMessages();
 			Session session = request.session();
 			session.attribute("user", user);
