@@ -3,6 +3,7 @@ package com.chat.dao;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -61,15 +62,31 @@ public class MessageDaoImpl implements MessageDao {
 				System.out.println(message.getId());
 				System.out.println(messageId);
 				if (message.getId().equals(messageId)) {
-					JsonObject playerObject = new JsonObject();
-					JsonObject attributesObject = new JsonObject();
-					attributesObject.addProperty("text", "Post has been removed");
-					attributesObject.addProperty("username", message.getUsername());
-					attributesObject.addProperty("id", message.getId());
-					attributesObject.addProperty("removed", true);
-					playerObject.add("message", attributesObject);
-					String updatedString = JsonUtils.toJson(playerObject);
-					line.replace(json, updatedString);
+					message.setMessage("Post has been removed");
+					message.setUsername(message.getUsername());
+					message.setRemoved();
+					String jsonUpdated = JsonUtils.toJson(message);
+//					System.out.println(jsonUpdated);
+					line = line.replace(json, jsonUpdated);
+//					System.out.println(line);
+					
+					
+					 // write the new String with the replaced line OVER the same file
+			        FileOutputStream outputStream = new FileOutputStream(MESSAGE_FILE_LOCATION);
+			        outputStream.write(line.getBytes());
+			        outputStream.write(System.getProperty("line.separator").getBytes());
+			        outputStream.close();
+			        
+//					JsonObject playerObject = new JsonObject();
+//					JsonObject attributesObject = new JsonObject();
+//					attributesObject.addProperty("text", "Post has been removed");
+//					attributesObject.addProperty("username", message.getUsername());
+//					attributesObject.addProperty("id", message.getId());
+//					attributesObject.addProperty("removed", true);
+//					playerObject.add("message", attributesObject);
+//					String updatedString = JsonUtils.toJson(playerObject);
+//					System.out.println(updatedString);
+//					line = line.replace(json, updatedString);
 				}
 			}
 			bufferedReader.close();
