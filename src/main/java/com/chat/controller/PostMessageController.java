@@ -70,13 +70,6 @@ public class PostMessageController implements TemplateViewRoute {
 			message.setUsername(user.getUsername());
 			messageDaoImpl.saveMessage(message);
 			messages = messageDaoImpl.getMessages();
-//			System.out.println("**********************************************");
-//			System.out.println("List Size: " + messages.size());
-			
-//			for (Message msg : messages) {
-//				System.out.println("**********************************************");
-//				System.out.println(msg.getMessage());
-//			}
 			vm.put(HomeController.BUTTON_CLASS, button.getButtonClass());
 			vm.put(HomeController.BUTTON_TYPE, button.getButtonType());
 			vm.put(HomeController.BUTTON_TEXT, button.getButtonText());

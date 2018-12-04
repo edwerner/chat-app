@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GetMessageController implements TemplateViewRoute {
+public class PostRemoveMessageController implements TemplateViewRoute {
 
 	final String CHAT_VIEW_NAME = "chat.ftl";
 	final String LOGIN_VIEW_NAME = "home.ftl";
@@ -29,7 +29,7 @@ public class GetMessageController implements TemplateViewRoute {
 	private Gui gui;
 	private String viewName;
 
-	public GetMessageController() {
+	public PostRemoveMessageController() {
 		try {
 			messageDaoImpl = new MessageDaoImpl();
 		} catch (IOException e) {
@@ -47,8 +47,9 @@ public class GetMessageController implements TemplateViewRoute {
 		final User user = session.attribute("user");
 		
 		boolean admin = false;
+		System.out.println("ACCOUNT TYPE: " + user.getAccountType());
 		
-		if (user != null) {
+		if (user.getAccountType() != null) {
 			if (user.getAccountType().equals("admin")) {
 				admin = true;
 			}

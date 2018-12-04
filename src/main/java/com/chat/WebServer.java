@@ -2,6 +2,7 @@ package com.chat;
 
 import static spark.Spark.*;
 
+import com.chat.controller.GetMessageController;
 import com.chat.controller.HomeController;
 import com.chat.controller.PostMessageController;
 import com.chat.controller.PostSigninController;
@@ -13,11 +14,12 @@ import spark.TemplateEngine;
 
 public class WebServer {
 	public static final String GET_HOME_URL = "/";
-	public static final String POST_SIGNIN_URL = "/list";
+	public static final String POST_SIGNIN_URL = "/chat";
 	public static final String GET_SIGNUP_URL = "/signup";
 	public static final String POST_SIGNUP_URL = "/signup";
 	public static final String POST_SIGNOUT_URL = "/";
 	public static final String POST_MESSAGE_URL = "/chat";
+	public static final String GET_MESSAGE_URL = "/chat";
 
 	private final TemplateEngine templateEngine;
 
@@ -33,5 +35,6 @@ public class WebServer {
 		post(POST_SIGNUP_URL, new PostSignupController(), templateEngine);
 		post(POST_SIGNOUT_URL, new PostSignoutController(), templateEngine);
 		post(POST_MESSAGE_URL, new PostMessageController(), templateEngine);
+		get(GET_MESSAGE_URL, new GetMessageController(), templateEngine);
 	}
 }
