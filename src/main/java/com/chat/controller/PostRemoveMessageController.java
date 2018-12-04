@@ -25,6 +25,7 @@ public class PostRemoveMessageController {
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
 				String messageId = request.queryParams("id");
+//				String messageId = request.attribute("id");
 				System.out.println("ROUTE: " + messageId);
 				messageDaoImpl.saveMessageById(messageId);
 				return null;

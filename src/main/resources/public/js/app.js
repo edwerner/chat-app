@@ -20,10 +20,11 @@ var onInactiveLogout = function() {
 }
 
 var removeMessage = function(id) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/remove", true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({ id: id }));
+    // var xhr = new XMLHttpRequest();
+    // xhr.open("POST", "/remove", true);
+    // xhr.setRequestHeader('Content-Type', 'application/json');
+    // xhr.send(JSON.stringify({ "id": id }));
+    $.post( "/remove", { id: id });
 }
 
 var bindAdminClick = function() {

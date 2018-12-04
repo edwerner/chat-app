@@ -6,7 +6,8 @@
 	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css"/>
 	<link rel="stylesheet" type="text/css" href="/css/flex.css"/>
-	<script src="/js/app.js"></script>.
+	<script src="/js/jquery-3.1.1.js"></script>.
+	<script src="/js/app.js"></script>
 </head>
 <body>
 	<div class="chat flex flex-column">

@@ -70,9 +70,9 @@ public class MessageDaoImpl implements MessageDao {
 					playerObject.add("message", attributesObject);
 					String updatedString = JsonUtils.toJson(playerObject);
 					line.replace(json, updatedString);
-					bufferedReader.close();
 				}
 			}
+			bufferedReader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
