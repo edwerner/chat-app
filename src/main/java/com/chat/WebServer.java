@@ -14,7 +14,7 @@ import spark.TemplateEngine;
 
 public class WebServer {
 	public static final String GET_HOME_URL = "/";
-	public static final String POST_SIGNIN_URL = "/chat";
+	public static final String POST_SIGNIN_URL = "/chatroom";
 	public static final String GET_SIGNUP_URL = "/signup";
 	public static final String POST_SIGNUP_URL = "/signup";
 	public static final String POST_SIGNOUT_URL = "/";

@@ -1,17 +1,22 @@
-var inactivityTime = function () {
-    var t;
+var onInactiveLogout = function () {
+    var timeout;
     window.onload = resetTimer;
-    // DOM Events
     document.onmousemove = resetTimer;
     document.onkeypress = resetTimer;
 
     function logout() {
-        alert("You are now logged out.");
-        location.href = '/'
+        alert("You've been signed out due to inactivity");
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send();
+        location.href = '/';
     }
 
     function resetTimer() {
-        clearTimeout(t);
-        t = setTimeout(logout, 10000);
+        clearTimeout(timeout);
+        timeout = setTimeout(logout, 5000);
     }
 };
+
+onInactiveLogout();
