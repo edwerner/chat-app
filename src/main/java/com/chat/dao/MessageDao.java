@@ -7,5 +7,5 @@ import com.chat.model.Message;
 public interface MessageDao {
 	void saveMessage(Message message);
 	ArrayList<Message> getMessages();
-	Message getMessageById(String messageId);
+	void saveMessageById(String messageId);
 }

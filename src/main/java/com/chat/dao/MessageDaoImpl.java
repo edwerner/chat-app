@@ -29,14 +29,51 @@ public class MessageDaoImpl implements MessageDao {
 		try {
 			JsonObject playerObject = new JsonObject();
 			JsonObject attributesObject = new JsonObject();
-			attributesObject.addProperty("message", message.getMessage());
+			attributesObject.addProperty("text", message.getMessage());
 			attributesObject.addProperty("username", message.getUsername());
+			attributesObject.addProperty("id", message.getId());
 			playerObject.add("message", attributesObject);
 			BufferedWriter outputStream = new BufferedWriter(new FileWriter(MESSAGE_FILE_LOCATION, true));
 			outputStream.write(JsonUtils.toJson(playerObject));
 			outputStream.newLine();
 			outputStream.close();
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void saveMessageById(String messageId) {
+		Message message = null;
+		String fileName = MESSAGE_FILE_LOCATION;
+		String line = null;
+
+		try {
+			FileReader fileReader = new FileReader(fileName);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+			while ((line = bufferedReader.readLine()) != null) {
+				JsonObject parserObject = (JsonObject) new JsonParser().parse(line);
+				JsonObject messageObject = parserObject.getAsJsonObject("message");
+				String json = JsonUtils.toJson(messageObject);
+				message = JsonUtils.fromMessageJson(json, Message.class);
+				System.out.println("***************************");
+				System.out.println(message.getId());
+				System.out.println(messageId);
+				if (message.getId().equals(messageId)) {
+					JsonObject playerObject = new JsonObject();
+					JsonObject attributesObject = new JsonObject();
+					attributesObject.addProperty("text", "Post has been removed");
+					attributesObject.addProperty("username", message.getUsername());
+					attributesObject.addProperty("id", message.getId());
+					attributesObject.addProperty("removed", true);
+					playerObject.add("message", attributesObject);
+					String updatedString = JsonUtils.toJson(playerObject);
+					line.replace(json, updatedString);
+					bufferedReader.close();
+				}
+			}
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -68,62 +105,5 @@ public class MessageDaoImpl implements MessageDao {
 			e.printStackTrace();
 		}
 		return messages;
-	}
-	
-	@Override
-	public Message getMessageById(String messageId) {
-		Message message = null;
-		Message messageMatch = null;
-		@SuppressWarnings("unused")
-		ArrayList<Message> messages = new ArrayList<Message>();
-		JsonObject parserObject;
-		String fileName = MESSAGE_FILE_LOCATION;
-		String line = null;
-
-		try {
-			FileReader fileReader = new FileReader(fileName);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-			while ((line = bufferedReader.readLine()) != null) {
-				parserObject = (JsonObject) new JsonParser().parse(line);
-				JsonObject messageObject = parserObject.getAsJsonObject("message");
-				String json = JsonUtils.toJson(messageObject);
-				message = JsonUtils.fromMessageJson(json, Message.class);
-				if (message.getId().equals(messageId)) {
-					messageMatch = message;
-				}
-			}
-			bufferedReader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return messageMatch;
-	}
-
-	public void removeMessage(String messageId) {
-		Message message = null;
-		@SuppressWarnings("unused")
-		ArrayList<Message> messages = new ArrayList<Message>();
-		JsonObject parserObject;
-		String fileName = MESSAGE_FILE_LOCATION;
-		String line = null;
-
-		try {
-			FileReader fileReader = new FileReader(fileName);
-			BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-			while ((line = bufferedReader.readLine()) != null) {
-				parserObject = (JsonObject) new JsonParser().parse(line);
-				JsonObject messageObject = parserObject.getAsJsonObject("message");
-				String json = JsonUtils.toJson(messageObject);
-				message = JsonUtils.fromMessageJson(json, Message.class);
-				if (message.getId().equals(messageId)) {
-					message.setMessage("Post has been removed");
-				}
-			}
-			bufferedReader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

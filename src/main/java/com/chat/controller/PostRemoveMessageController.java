@@ -3,7 +3,6 @@ package com.chat.controller;
 import java.io.IOException;
 
 import com.chat.dao.MessageDaoImpl;
-import com.chat.model.Message;
 
 import spark.Request;
 import spark.Response;
@@ -21,13 +20,13 @@ public class PostRemoveMessageController {
 		}
 	}
 
-	public Route postDeleteMessage() {
+	public Route postRemoveMessage() {
 		return new Route() {
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
-				String messageId = request.queryParams("messageId");
-				Message message = messageDaoImpl.getMessageById(messageId);
-				messageDaoImpl.removeMessage(message.getId());
+				String messageId = request.queryParams("id");
+				System.out.println("ROUTE: " + messageId);
+				messageDaoImpl.saveMessageById(messageId);
 				return null;
 			}
 		};

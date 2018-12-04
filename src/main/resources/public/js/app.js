@@ -21,7 +21,7 @@ var onInactiveLogout = function() {
 
 var removeMessage = function(id) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", yourUrl, true);
+    xhr.open("POST", "/remove", true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({ id: id }));
 }
@@ -32,12 +32,12 @@ var bindAdminClick = function() {
     console.log(messagesCount);
     for (var i = 0; i < messagesCount; i += 1) {
         messages[i].onclick = function(e) {
-            alert(this.id);
+            removeMessage(this.id);
         }
     }
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
     bindAdminClick();
-    onInactiveLogout();
+    // onInactiveLogout();
 });

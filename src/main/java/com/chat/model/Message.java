@@ -4,12 +4,14 @@ import java.util.UUID;
 
 public class Message {
 
-	private String message;
+	private String text;
 	private String username;
 	private String id;
+	private boolean removed;
 	
 	public Message() {
 		this.id = UUID.randomUUID().toString();
+		this.removed = false;
 	}
 	
 	public String getId() {
@@ -17,11 +19,11 @@ public class Message {
 	}
 
 	public String getMessage() {
-		return message;
+		return text;
 	}
 	
-	public void setMessage(String message) {
-		this.message = message;
+	public void setMessage(String text) {
+		this.text = text;
 	}
 	
 	public String getUsername() {
@@ -30,5 +32,13 @@ public class Message {
 	
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public void setRemoved() {
+		this.removed = true;
+	}
+	
+	public boolean getRemoved() {
+		return this.removed;
 	}
 }

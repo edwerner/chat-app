@@ -33,8 +33,8 @@
 							<span class="">${message.getMessage()}</span>
 						</div>
 						<div class="flex flex-end">
-							<div class="remove-message-text">Remove message</div>
-							<button type="button" class="flex flex-end close remove-message" data-dismiss="alert" aria-label="Close">
+							<div class="remove-message-text">Remove post</div>
+							<button type="button" id="${message.getId()}" class="flex flex-end close remove-message" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true"> &times;</span>
 							</button>
 						</div>

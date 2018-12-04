@@ -22,7 +22,7 @@ public class WebServer {
 	public static final String POST_SIGNOUT_URL = "/";
 	public static final String POST_MESSAGE_URL = "/chat";
 	public static final String GET_MESSAGE_URL = "/chat";
-	public static final String POST_DELETE_MESSAGE_URL = "/delete";
+	public static final String POST_REMOVE_MESSAGE_URL = "/remove";
 
 	private final TemplateEngine templateEngine;
 
@@ -39,6 +39,6 @@ public class WebServer {
 		post(POST_SIGNOUT_URL, new PostSignoutController(), templateEngine);
 		post(POST_MESSAGE_URL, new PostMessageController(), templateEngine);
 		get(GET_MESSAGE_URL, new GetMessageController(), templateEngine);
-		post(POST_DELETE_MESSAGE_URL, new PostRemoveMessageController().postDeleteMessage(), new JsonTransformer());
+		post(POST_REMOVE_MESSAGE_URL, new PostRemoveMessageController().postRemoveMessage(), new JsonTransformer());
 	}
 }
