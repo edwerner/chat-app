@@ -69,4 +69,61 @@ public class MessageDaoImpl implements MessageDao {
 		}
 		return messages;
 	}
+	
+	@Override
+	public Message getMessageById(String messageId) {
+		Message message = null;
+		Message messageMatch = null;
+		@SuppressWarnings("unused")
+		ArrayList<Message> messages = new ArrayList<Message>();
+		JsonObject parserObject;
+		String fileName = MESSAGE_FILE_LOCATION;
+		String line = null;
+
+		try {
+			FileReader fileReader = new FileReader(fileName);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+			while ((line = bufferedReader.readLine()) != null) {
+				parserObject = (JsonObject) new JsonParser().parse(line);
+				JsonObject messageObject = parserObject.getAsJsonObject("message");
+				String json = JsonUtils.toJson(messageObject);
+				message = JsonUtils.fromMessageJson(json, Message.class);
+				if (message.getId().equals(messageId)) {
+					messageMatch = message;
+				}
+			}
+			bufferedReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return messageMatch;
+	}
+
+	public void removeMessage(String messageId) {
+		Message message = null;
+		@SuppressWarnings("unused")
+		ArrayList<Message> messages = new ArrayList<Message>();
+		JsonObject parserObject;
+		String fileName = MESSAGE_FILE_LOCATION;
+		String line = null;
+
+		try {
+			FileReader fileReader = new FileReader(fileName);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+			while ((line = bufferedReader.readLine()) != null) {
+				parserObject = (JsonObject) new JsonParser().parse(line);
+				JsonObject messageObject = parserObject.getAsJsonObject("message");
+				String json = JsonUtils.toJson(messageObject);
+				message = JsonUtils.fromMessageJson(json, Message.class);
+				if (message.getId().equals(messageId)) {
+					message.setMessage("Post has been removed");
+				}
+			}
+			bufferedReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
