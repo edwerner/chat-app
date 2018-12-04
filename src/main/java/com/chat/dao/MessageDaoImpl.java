@@ -30,7 +30,7 @@ public class MessageDaoImpl implements MessageDao {
 			JsonObject playerObject = new JsonObject();
 			JsonObject attributesObject = new JsonObject();
 			attributesObject.addProperty("message", message.getMessage());
-			attributesObject.addProperty("username", message.getMessage());
+			attributesObject.addProperty("username", message.getUsername());
 			playerObject.add("message", attributesObject);
 			BufferedWriter outputStream = new BufferedWriter(new FileWriter(MESSAGE_FILE_LOCATION, true));
 			outputStream.write(JsonUtils.toJson(playerObject));

@@ -24,24 +24,35 @@
 				<#if admin>
 					<#if messages??>
 						<#list messages as message>
-							<div class="alert alert-danger flex flex-start message admin-message" role="alert">
-								<div class="flex flex-start">
-									${message.getMessage()}
-								</div>
-								<div class="flex flex-end">
-									<div class="remove-message-text">Remove message</div>
-									<button type="button" class="flex flex-end close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true"> &times;</span>
-									</button>
+							<div class="message flex flex-row">
+								<div class="alert alert-danger flex flex-start message admin-message" role="alert">
+									<div class="badge badge-primary username-badge message-username flex flex-start">
+										${message.getUsername()}
+									</div>
+									<div class="message-content flex flex-start">
+										<span class="">${message.getMessage()}</span>
+									</div>
+									<div class="flex flex-end">
+										<div class="remove-message-text">Remove message</div>
+										<button type="button" class="flex flex-end close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true"> &times;</span>
+										</button>
+									</div>
 								</div>
 							</div>
-							<div class=""></div>
 						</#list>
 					</#if>
 				<#else>
 					<#if messages??>
 						<#list messages as message>
-							<div class="flex flex-start message">${message.getMessage()}</div>
+							<div class="message flex flex-row">
+								<div class="message-username">
+									<div class="badge badge-primary username-badge message-username">${message.getUsername()}</div>
+								</div>
+								<div class="message-content flex">
+									<span>${message.getMessage()}</span>
+								</div>
+							</div>
 						</#list>
 					</#if>
 				</#if>

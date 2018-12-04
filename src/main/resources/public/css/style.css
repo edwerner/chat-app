@@ -177,8 +177,20 @@ div.message {
     border-radius: 4px;
 }
 
-div.admin-message {
+div.message-username, div.message-content {
+    font-size: 14px;
+}
 
+div.message-username {
+    font-color: #CCCCCC;
+}
+
+div.message-content {
+    margin-left: 20px;
+}
+
+div.username-badge {
+    background: #007bff;
 }
 
 input{
