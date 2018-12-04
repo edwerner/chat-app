@@ -135,8 +135,12 @@ div.logo-content {
     margin-bottom: 20px;
 }
 
+div.logo-content img{
+    width: 100px;
+}
+
 div.chat-logo-content img {
-    height: 50px;
+    width: 50px;
 }
 
 div.login-form {

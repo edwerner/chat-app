@@ -27,7 +27,7 @@ public class PostSignoutController implements TemplateViewRoute {
 	static final String LOGIN_PAGE = "signinPage";
 	static final String NEW_USER = "newUserSignup";
 	static final String SIGNUP_MESSAGE = "SignUpMessage";
-	static final String SIGNOUT_MESSAGE = "You have successfully signed out";
+	static final String SIGNOUT_MESSAGE = "You've successfully signed out";
 	private Gui gui;
 	@SuppressWarnings("unused")
 	private UserService playerService;
