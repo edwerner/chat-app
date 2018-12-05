@@ -4,8 +4,8 @@ import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.chat.controller.JsonUtils;
 import com.chat.model.User;
+import com.chat.controller.JsonUtils;
 import com.chat.model.Account;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -64,7 +64,7 @@ public class UserDaoImpl implements UserDao {
 	 */
 	@Override
 	public Account findUserByUsername(String username) {
-		User player = null;
+		User user = null;
 		User existingUser = null;
 		JsonObject parserObject;
 		String fileName = USER_FILE_LOCATION;
@@ -78,10 +78,10 @@ public class UserDaoImpl implements UserDao {
 				parserObject = (JsonObject) new JsonParser().parse(line);
 				JsonObject playerObject = parserObject.getAsJsonObject("user");
 				String json = JsonUtils.toJson(playerObject);
-				player = JsonUtils.fromPlayerJson(json, User.class);
-				if (player != null) {
-					if (player.getUsername().equals(username)) {
-						existingUser = player;
+				user = JsonUtils.fromPlayerJson(json, User.class);
+				if (user != null) {
+					if (user.getUsername().equals(username)) {
+						existingUser = user;
 					}
 				}
 			}
