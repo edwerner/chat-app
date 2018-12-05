@@ -65,7 +65,6 @@ public class PostSigninController implements TemplateViewRoute {
 			Session session = request.session();
 			user.setAccountType(existingUser.getAccountType());
 			session.attribute("user", user);
-//			session.maxInactiveInterval(50);
 			Button button = gui.getSendMessageButton();
 			vm.put(HomeController.BUTTON_CLASS, button.getButtonClass());
 			vm.put(HomeController.BUTTON_TYPE, button.getButtonType());

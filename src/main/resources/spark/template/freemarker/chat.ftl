@@ -25,7 +25,8 @@
 				<#if admin == true>
 				<#if messages??>
 				<#list messages as message>
-				<div class="flex flex-row">
+				<#if message.removed == false>
+				<div class="flex flex-row" id="edit_${message.getId()}">
 					<div class="alert alert-danger flex flex-start message admin-message" role="alert">
 						<div class="badge badge-primary username-badge message-username flex flex-start">
 							${message.getUsername()}
@@ -41,11 +42,22 @@
 						</div>
 					</div>
 				</div>
+				</#if>
 				</#list>
 				</#if>
 				<#elseif admin == false>
 				<#if messages??>
 				<#list messages as message>
+				<#if message.removed == true>
+					<div class="alert alert-danger flex flex-start message admin-message" role="alert">
+						<div class="badge badge-primary username-badge message-username flex flex-start">
+							${message.getUsername()}
+						</div>
+						<div class="message-content flex flex-start">
+							<span>${message.getMessage()}</span>
+						</div>
+					</div>
+				<#elseif message.getRemoved() == false>
 				<div class="message flex flex-row">
 					<div class="message-username">
 						<div class="badge badge-primary username-badge message-username">${message.getUsername()}</div>
@@ -54,6 +66,7 @@
 						<span>${message.getMessage()}</span>
 					</div>
 				</div>
+				</#if>
 				</#list>
 				</#if>
 				</#if>

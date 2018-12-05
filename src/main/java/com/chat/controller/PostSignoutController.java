@@ -16,7 +16,7 @@ import spark.TemplateViewRoute;
 
 public class PostSignoutController implements TemplateViewRoute {
 
-	static final String TITLE = "List App";
+	static final String TITLE = "Chat App";
 	static final String TITLE_ATTRIBUTE = "title";
 	static final String BUTTON_CLASS = "buttonClass";
 	static final String BUTTON_TYPE = "buttonType";
