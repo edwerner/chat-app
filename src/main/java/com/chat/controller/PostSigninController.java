@@ -22,7 +22,7 @@ public class PostSigninController implements TemplateViewRoute {
 	static final String USER_NAME = "inputUsername";
 	static final String ADMIN = "admin";
 	static final String PASSWORD = "inputPassword";
-	static final String INVALID_LOGIN_MESSAGE = "Incorrect Username/Password";
+	static String INVALID_LOGIN_MESSAGE = "Incorrect Username/Password";
 	private MessageDaoImpl messageDaoImpl;
 	public ArrayList<Message> messages = new ArrayList<Message>();
 	static final String MESSAGES = "messages";
@@ -51,11 +51,16 @@ public class PostSigninController implements TemplateViewRoute {
 		Account user = new User();
 		user.setUsername(username);
 		user.setPassword(password);
-
-		final boolean loggedIn = playerService.authenticate(user);
 		boolean admin = false;
+		boolean loggedIn = false;
+		Account existingUser = null;
 		
-		final Account existingUser = playerService.findPlayer(user);
+		if (username != null) {
+			loggedIn = playerService.authenticate(user);
+			existingUser = playerService.findPlayer(user);
+		} else {
+			INVALID_LOGIN_MESSAGE = "You muse be signed in to continue";
+		}
 		
 		if (loggedIn) {
 			if (existingUser.getAccountType().equals("admin")) {

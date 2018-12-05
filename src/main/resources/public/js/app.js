@@ -15,7 +15,7 @@ var onInactiveLogout = function() {
 
     function resetTimer() {
         clearTimeout(timeout);
-        timeout = setTimeout(logout, 5000);
+        timeout = setTimeout(logout, 10000);
     }
 }
 
@@ -39,5 +39,5 @@ var removeMessage = function(id) {
 
 document.addEventListener("DOMContentLoaded", function(event) {
     bindAdminClick();
-    // onInactiveLogout();
+    onInactiveLogout();
 });

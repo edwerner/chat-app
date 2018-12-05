@@ -20,7 +20,7 @@ public class PostMessageController implements TemplateViewRoute {
 
 	static final String CHAT_VIEW_NAME = "chat.ftl";
 	static final String TITLE = "title";
-	static final String INVALID_ACCESS_MESSAGE = "You must be registered and signed in to play.";
+	static final String INVALID_ACCESS_MESSAGE = "You must be signed in to continue";
 	static final String MESSAGE = "inputMessage";
 	static final String INVALID_LOGIN_MESSAGE = "Incorrect Username/Password";
 	static final String MESSAGES = "messages";

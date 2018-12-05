@@ -21,7 +21,7 @@ public class GetMessageController implements TemplateViewRoute {
 	final String LOGIN_VIEW_NAME = "home.ftl";
 	static final String USER_NAME = "inputUsername";
 	static final String PASSWORD = "inputPassword";
-	static final String INVALID_LOGIN_MESSAGE = "You must be logged in to continue";
+	static final String INVALID_LOGIN_MESSAGE = "You must be signed in to continue";
 	static final String ADMIN = "admin";
 	private MessageDaoImpl messageDaoImpl;
 	public ArrayList<Message> messages = new ArrayList<Message>();
