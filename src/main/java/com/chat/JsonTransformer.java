@@ -1,7 +1,5 @@
 package com.chat;
 
-import com.chat.controller.JsonUtils;
-
 import spark.ResponseTransformer;
 
 public class JsonTransformer implements ResponseTransformer {
