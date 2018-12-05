@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.chat.controller.JsonUtils;
+import com.chat.JsonUtils;
 import com.chat.model.Message;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.chat.model.User;
-import com.chat.controller.JsonUtils;
+import com.chat.JsonUtils;
 import com.chat.model.Account;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

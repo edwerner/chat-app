@@ -1,4 +1,4 @@
-package com.chat.controller;
+package com.chat;
 
 import spark.ResponseTransformer;
 
