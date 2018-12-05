@@ -10,7 +10,6 @@ import com.chat.controller.PostSigninController;
 import com.chat.controller.PostSignoutController;
 import com.chat.controller.PostSignupController;
 import com.chat.controller.SignupController;
-import com.chat.controller.PostRemoveMessageController;
 
 import spark.TemplateEngine;
 

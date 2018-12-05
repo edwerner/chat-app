@@ -33,7 +33,7 @@ public final class Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		User user = new User();
+		Account user = new User();
 		user.setUsername("admin");
 		user.setPassword("admin");
 		user.setAccountType("admin");

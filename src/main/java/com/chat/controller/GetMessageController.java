@@ -2,7 +2,6 @@ package com.chat.controller;
 
 import com.chat.dao.MessageDaoImpl;
 import com.chat.model.*;
-import com.chat.service.UserService;
 
 import spark.ModelAndView;
 import spark.Request;
