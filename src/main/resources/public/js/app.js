@@ -37,6 +37,14 @@ var removeMessage = function(id) {
     });
 }
 
+window.onunload = function() {;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send();
+    location.href = '/';
+}
+
 document.addEventListener("DOMContentLoaded", function(event) {
     bindAdminClick();
     onInactiveLogout();
