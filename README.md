@@ -7,10 +7,15 @@ A simple chat application built on Java Spark Framework
 * Java Spark
 * Freemarker Templates
 * Google Gson
+* jQuery
 
 ## Data Persistence
 
 Java file services
+
+## Prerequisites
+Java 8
+Apache Maven
 
 ## Usage
 

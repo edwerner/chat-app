@@ -77,7 +77,7 @@ public class PostSigninController implements TemplateViewRoute {
 			loggedIn = userService.authenticate(user);
 			existingUser = userService.findUser(user);
 		} else {
-			INVALID_LOGIN_MESSAGE = "You muse be signed in to continue";
+			INVALID_LOGIN_MESSAGE = "You must be signed in to continue";
 		}
 		
 		if (loggedIn) {
