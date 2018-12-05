@@ -14,6 +14,10 @@ import com.chat.controller.SignupController;
 import spark.TemplateEngine;
 
 public class WebServer {
+	
+	/**
+	 * Public routes for Spark views
+	 */
 	public static final String GET_HOME_URL = "/";
 	public static final String POST_SIGNIN_URL = "/chatroom";
 	public static final String GET_SIGNIN_URL = "/chatroom";
@@ -29,7 +33,11 @@ public class WebServer {
 	public WebServer(final TemplateEngine templateEngine) {
 		this.templateEngine = templateEngine;
 	}
-
+	
+	/**
+	 * Initializes routes and binds
+	 * them to controllers
+	 */
 	public void initialize() {
 		staticFileLocation("/public");
 		get(GET_HOME_URL, new HomeController(), templateEngine);

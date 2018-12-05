@@ -13,6 +13,9 @@ import spark.TemplateViewRoute;
 
 public class HomeController implements TemplateViewRoute {
 
+	/**
+	 * Static members
+	 */
 	public static final String HOME_VIEW_NAME = "home.ftl";
 	static final String TITLE = "Chat App";
 	static final String TITLE_ATTRIBUTE = "title";
@@ -25,8 +28,13 @@ public class HomeController implements TemplateViewRoute {
 	static final String LOGIN_PAGE = "signinPage";
 	static final String NEW_USER = "newUserSignup";
 	static final String SIGNUP_MESSAGE = "SignUpMessage";
+	
 	private Gui gui;
-
+	
+	/**
+	 * Constructor initializes
+	 * new Gui model
+	 */
 	public HomeController() {
 		gui = new Gui();
 	}

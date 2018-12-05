@@ -19,13 +19,19 @@ public class PostRemoveMessageController {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Remove message admin route
+	 * edits message and re-saves
+	 * with admin message overwrite
+	 * 
+	 * @return
+	 */
 	public Route postRemoveMessage() {
 		return new Route() {
 			@Override
 			public Object handle(Request request, Response response) throws Exception {
 				String messageId = request.queryParams("id");
-				messageDaoImpl.saveMessageById(messageId);
+				messageDaoImpl.editMessage(messageId);
 				return messageId;
 			}
 		};

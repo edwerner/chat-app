@@ -10,6 +10,12 @@ public class MessageService {
 
 	private MessageDaoImpl messageDaoImpl;
 
+	/**
+	 * Constructor instantiates
+	 * new messag dao implementation
+	 * 
+	 * @throws IOException
+	 */
 	public MessageService() throws IOException {
 		messageDaoImpl = new MessageDaoImpl();
 	}

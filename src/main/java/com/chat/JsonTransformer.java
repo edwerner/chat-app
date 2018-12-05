@@ -4,9 +4,6 @@ import com.chat.controller.JsonUtils;
 
 import spark.ResponseTransformer;
 
-/**
- * The Class JsonTransformer.
- */
 public class JsonTransformer implements ResponseTransformer {
 	
 	/**

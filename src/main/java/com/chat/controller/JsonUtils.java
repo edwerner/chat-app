@@ -6,6 +6,14 @@ import com.chat.model.Message;
 import com.chat.model.User;
 import com.google.gson.Gson;
 
+/**
+ * JsonUtils class provides
+ * different methods for
+ * transforming from domain
+ * models to json strings
+ * and the inverse
+ * 
+ */
 public class JsonUtils {
 
 	private static Gson GSON = new Gson();

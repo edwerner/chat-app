@@ -14,6 +14,12 @@ public final class Application {
 	private static final Logger LOG = Logger.getLogger(Application.class.getName());
 	private final WebServer webServer;
 
+	/**
+	 * Main method instantiates
+	 * application
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		final TemplateEngine templateEngine = new FreeMarkerEngine();
 		final WebServer webServer = new WebServer(templateEngine);
@@ -21,11 +27,20 @@ public final class Application {
 		application.initialize();
 	}
 
+	/**
+	 * Instantiates we server and
+	 * creates admin account
+	 * 
+	 * @param webServer
+	 */
 	private Application(final WebServer webServer) {
 		this.webServer = webServer;
 		createAdminAccount();
 	}
 	
+	/**
+	 * Creates admin account
+	 */
 	private void createAdminAccount() {
 		UserService userService = null;
 		try {
@@ -39,7 +54,10 @@ public final class Application {
 		user.setAccountType("admin");
 		userService.savePlayer(user);
 	}
-
+	
+	/**
+	 * Initializes application
+	 */
 	private void initialize() {
 		LOG.fine("Authentication app is initializing.");
 		webServer.initialize();

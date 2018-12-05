@@ -18,6 +18,9 @@ import spark.Session;
 
 public class PostMessageController implements TemplateViewRoute {
 
+	/**
+	 * Static members
+	 */
 	static final String CHAT_VIEW_NAME = "chat.ftl";
 	static final String TITLE = "title";
 	static final String INVALID_ACCESS_MESSAGE = "You must be signed in to continue";
@@ -25,11 +28,17 @@ public class PostMessageController implements TemplateViewRoute {
 	static final String INVALID_LOGIN_MESSAGE = "Incorrect Username/Password";
 	static final String MESSAGES = "messages";
 	static final String ADMIN = "admin";
+	
 	private Gui gui;
 	private String viewName;
 	private MessageDaoImpl messageDaoImpl;
 	public ArrayList<Message> messages = new ArrayList<Message>();
 
+	/**
+	 * Instantiates Gui model
+	 * and message dao implementation
+	 * for persisting messages
+	 */
 	public PostMessageController() {
 		this.gui = new Gui();
 		try {
@@ -39,6 +48,13 @@ public class PostMessageController implements TemplateViewRoute {
 		}
 	}
 
+	/**
+	 * Model and view handler
+	 * 
+	 * @param request
+	 * @param response
+	 * @return new model and view
+	 */
 	public ModelAndView handle(Request request, Response response) {
 		Map<String, Object> vm = new HashMap<>();
 

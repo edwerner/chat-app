@@ -16,18 +16,27 @@ import java.util.Map;
 
 public class GetMessageController implements TemplateViewRoute {
 
+	/**
+	 * Static members
+	 */
 	final String CHAT_VIEW_NAME = "chat.ftl";
 	final String LOGIN_VIEW_NAME = "home.ftl";
 	static final String USER_NAME = "inputUsername";
 	static final String PASSWORD = "inputPassword";
 	static final String INVALID_LOGIN_MESSAGE = "You must be signed in to continue";
 	static final String ADMIN = "admin";
+	static final String MESSAGES = "messages";
+	
 	private MessageDaoImpl messageDaoImpl;
 	public ArrayList<Message> messages = new ArrayList<Message>();
-	static final String MESSAGES = "messages";
 	private Gui gui;
 	private String viewName;
 
+	/**
+	 * Constructor initializes
+	 * message dao to persist
+	 * messages
+	 */
 	public GetMessageController() {
 		try {
 			messageDaoImpl = new MessageDaoImpl();
@@ -36,12 +45,18 @@ public class GetMessageController implements TemplateViewRoute {
 		}
 		gui = new Gui();
 	}
-
+	
+	/**
+     * Model and view handler
+     * 
+     * @param request
+     * @param response
+     * @return new model and view
+     */
 	@Override
 	public ModelAndView handle(Request request, Response response) {
 
 		Map<String, Object> vm = new HashMap<>();
-
 		Session session = request.session();
 		final User user = session.attribute("user");
 		

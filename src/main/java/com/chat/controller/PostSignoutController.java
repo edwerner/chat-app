@@ -1,12 +1,10 @@
 package com.chat.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.chat.model.Button;
 import com.chat.model.Gui;
-import com.chat.service.UserService;
 
 import spark.ModelAndView;
 import spark.Request;
@@ -16,6 +14,9 @@ import spark.TemplateViewRoute;
 
 public class PostSignoutController implements TemplateViewRoute {
 
+	/**
+	 * Static members
+	 */
 	static final String TITLE = "Chat App";
 	static final String TITLE_ATTRIBUTE = "title";
 	static final String BUTTON_CLASS = "buttonClass";
@@ -28,19 +29,24 @@ public class PostSignoutController implements TemplateViewRoute {
 	static final String NEW_USER = "newUserSignup";
 	static final String SIGNUP_MESSAGE = "SignUpMessage";
 	static final String SIGNOUT_MESSAGE = "You've successfully signed out";
+	
 	private Gui gui;
-	@SuppressWarnings("unused")
-	private UserService playerService;
 
+	/**
+	 * Constructor instantiates
+	 * new Gui model
+	 */
 	public PostSignoutController() {
-		try {
-			playerService = new UserService();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		gui = new Gui();
 	}
 
+	/**
+	 * Model and view handler
+	 * 
+	 * @param request
+	 * @param response
+	 * @return new model and view
+	 */
 	@Override
 	public ModelAndView handle(Request request, Response response) {
 		Session session = request.session();

@@ -14,10 +14,21 @@ public class SignupController implements TemplateViewRoute {
 
 	private Gui gui;
 
+	/**
+	 * Constructor instantiates
+	 * new Gui model
+	 */
 	public SignupController() {
 		gui = new Gui();
 	}
-
+	
+	/**
+	 * Model and view handler
+	 * 
+	 * @param request
+	 * @param response
+	 * @return new model and view
+	 */
 	@Override
 	public ModelAndView handle(Request request, Response response) {
 		Map<String, Object> vm = new HashMap<>();

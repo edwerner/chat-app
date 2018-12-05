@@ -9,6 +9,12 @@ public class UserService {
 
 	private UserDaoImpl userDaoImpl;
 
+	/**
+	 * Constructor instantiates
+	 * new user dao implementation
+	 * 
+	 * @throws IOException
+	 */
 	public UserService() throws IOException {
 		userDaoImpl = new UserDaoImpl();
 	}
@@ -17,21 +23,21 @@ public class UserService {
 		userDaoImpl.saveUser(user);
 	}
 
-	public Account findPlayer(Account player) {
-		Account existingPlayer = userDaoImpl.findPlayerByUsername(player.getUsername());
+	public Account findUser(Account user) {
+		Account existingPlayer = userDaoImpl.findUserByUsername(user.getUsername());
 		return existingPlayer;
 	}
 
-	public boolean authenticate(Account player) {
-		if (player.getUsername().isEmpty() || player.getPassword().isEmpty()) {
+	public boolean authenticate(Account user) {
+		if (user.getUsername().isEmpty() || user.getPassword().isEmpty()) {
 			return false;
 		}
 
-		Account pl = userDaoImpl.findPlayerByUsername(player.getUsername());
+		Account pl = userDaoImpl.findUserByUsername(user.getUsername());
 		if (pl == null) {
 			return false;
 		}
-		boolean passwordsMatch = userDaoImpl.passwordsMatch(player);
+		boolean passwordsMatch = userDaoImpl.passwordsMatch(user);
 		return passwordsMatch;
 	}
 }

@@ -17,29 +17,47 @@ import java.util.Map;
 
 public class PostSigninController implements TemplateViewRoute {
 
+	/**
+	 * Static members
+	 */
 	final String CHAT_VIEW_NAME = "chat.ftl";
 	final String LOGIN_VIEW_NAME = "home.ftl";
 	static final String USER_NAME = "inputUsername";
 	static final String ADMIN = "admin";
 	static final String PASSWORD = "inputPassword";
 	static String INVALID_LOGIN_MESSAGE = "Incorrect Username/Password";
+	static final String MESSAGES = "messages";
+	
 	private MessageDaoImpl messageDaoImpl;
 	public ArrayList<Message> messages = new ArrayList<Message>();
-	static final String MESSAGES = "messages";
-	private UserService playerService;
+	private UserService userService;
 	private Gui gui;
 	private String viewName;
 
+	/**
+	 * Constructor instantiates
+	 * message dao implementation
+	 * to persist messages and
+	 * user service to persist
+	 * user data
+	 */
 	public PostSigninController() {
 		try {
 			messageDaoImpl = new MessageDaoImpl();
-			playerService = new UserService();
+			userService = new UserService();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		gui = new Gui();
 	}
-
+	
+	/**
+	 * Model and view handler
+	 * 
+	 * @param request
+	 * @param response
+	 * @return new model and view
+	 */
 	@Override
 	public ModelAndView handle(Request request, Response response) {
 
@@ -56,8 +74,8 @@ public class PostSigninController implements TemplateViewRoute {
 		Account existingUser = null;
 		
 		if (username != null) {
-			loggedIn = playerService.authenticate(user);
-			existingUser = playerService.findPlayer(user);
+			loggedIn = userService.authenticate(user);
+			existingUser = userService.findUser(user);
 		} else {
 			INVALID_LOGIN_MESSAGE = "You muse be signed in to continue";
 		}

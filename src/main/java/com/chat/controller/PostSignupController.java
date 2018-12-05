@@ -18,6 +18,9 @@ import java.util.Map;
 
 public class PostSignupController implements TemplateViewRoute {
 
+	/**
+	 * Static members
+	 */
 	static final String LOGIN_VIEW_NAME = "home.ftl";
 	static final String USER_NAME = "inputUsername";
 	static final String PASSWORD = "inputPassword";
@@ -27,30 +30,37 @@ public class PostSignupController implements TemplateViewRoute {
 	static final String SIGNUP_SUCCESS_MESSAGE = "You have successfully signed up.";
 	static final String SIGNUP_FAILURE_MESSAGE = "Username is taken. Try again.";
 	static final String SIGNUP_FAIL_MESSAGE = "Error while signing up.";
+	
 	private Gui gui;
-	private UserService playerService;
+	private UserService userService;
 
+	/**
+	 * Constructor instantiates
+	 * UserService to persist
+	 * user data and instantiates
+	 * new Gui model
+	 */
 	public PostSignupController() {
 		try {
-			playerService = new UserService();
+			userService = new UserService();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		gui = new Gui();
 	}
-
+	
+	/**
+	 * Model and view handler
+	 * 
+	 * @param request
+	 * @param response
+	 * @return new model and view
+	 */
 	@Override
 	public ModelAndView handle(Request request, Response response) {
 		Session session = request.session();
 		session.attribute("user", null);
-
 		Map<String, Object> vm = new HashMap<>();
-		try {
-			playerService = new UserService();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 		final String username = request.queryParams(USER_NAME);
 		final String password = request.queryParams(PASSWORD);
 		String signupMessage;
@@ -62,10 +72,10 @@ public class PostSignupController implements TemplateViewRoute {
 		user.setUsername(username);
 		user.setPassword(password);
 		user.setAccountType("user");
-		Account existingUser = playerService.findPlayer(user);
+		Account existingUser = userService.findUser(user);
 
 		if (existingUser == null) {
-			playerService.savePlayer(user);
+			userService.savePlayer(user);
 			signupStatus = false;
 			newUserSignup = true;
 			signInPage = true;

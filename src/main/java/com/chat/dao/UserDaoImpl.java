@@ -13,11 +13,27 @@ import com.google.gson.JsonParser;
 public class UserDaoImpl implements UserDao {
 	private final String USER_FILE_LOCATION = "database/users.txt";
 
+	/**
+	 * Constructor instantiates
+	 * new user file to persist
+	 * records
+	 * 
+	 * @throws IOException
+	 */
 	public UserDaoImpl() throws IOException {
-		File playerFile = new File(USER_FILE_LOCATION);
-		playerFile.createNewFile();
+		File userFile = new File(USER_FILE_LOCATION);
+		userFile.createNewFile();
 	}
-
+	
+	/**
+	 * Uses file reader and buffered
+	 * reader to read file lines,
+	 * convert to json object and
+	 * JSON string then overwrites
+	 * and re-saves data file
+	 *
+	 * @param user
+	 */
 	@Override
 	public void saveUser(Account user) {
 		try {
@@ -36,10 +52,20 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
+	/**
+	 * Uses file reader and buffered
+	 * reader to read file lines,
+	 * convert to json object and
+	 * JSON string then return domain
+	 * model matching on username
+	 *
+	 * @param username
+	 * @return user
+	 */
 	@Override
-	public Account findPlayerByUsername(String username) {
+	public Account findUserByUsername(String username) {
 		User player = null;
-		User existingPlayer = null;
+		User existingUser = null;
 		JsonObject parserObject;
 		String fileName = USER_FILE_LOCATION;
 		String line = null;
@@ -55,7 +81,7 @@ public class UserDaoImpl implements UserDao {
 				player = JsonUtils.fromPlayerJson(json, User.class);
 				if (player != null) {
 					if (player.getUsername().equals(username)) {
-						existingPlayer = player;
+						existingUser = player;
 					}
 				}
 			}
@@ -63,12 +89,23 @@ public class UserDaoImpl implements UserDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return existingPlayer;
+		return existingUser;
 	}
 
+	/**
+	 * Uses file reader and buffered
+	 * reader to read file lines,
+	 * convert to json object and
+	 * JSON string then return domain
+	 * model matching on username
+	 * and password
+	 *
+	 * @param user
+	 * @return boolean
+	 */
 	@Override
-	public boolean passwordsMatch(Account player) {
-		User existingPlayer = null;
+	public boolean passwordsMatch(Account user) {
+		User existingUser = null;
 		boolean passwordsMatch = false;
 		JsonObject parserObject;
 		String line = null;
@@ -77,7 +114,7 @@ public class UserDaoImpl implements UserDao {
 			FileReader fileReader = new FileReader(USER_FILE_LOCATION);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-			Pattern p = Pattern.compile(Pattern.quote(player.getPassword())); // quotes in case you need 'Hello.'
+			Pattern p = Pattern.compile(Pattern.quote(user.getPassword())); // quotes in case you need 'Hello.'
 			@SuppressWarnings("unused")
 			int count = 0;
 			while ((line = bufferedReader.readLine()) != null)
@@ -85,10 +122,10 @@ public class UserDaoImpl implements UserDao {
 					parserObject = (JsonObject) new JsonParser().parse(line);
 					JsonObject playerObject = parserObject.getAsJsonObject("user");
 					String json = JsonUtils.toJson(playerObject);
-					existingPlayer = JsonUtils.fromPlayerJson(json, User.class);
-					if (existingPlayer != null) {
-						if (existingPlayer.getUsername().equals(player.getUsername())
-								&& existingPlayer.getPassword().equals(player.getPassword())) {
+					existingUser = JsonUtils.fromPlayerJson(json, User.class);
+					if (existingUser != null) {
+						if (existingUser.getUsername().equals(user.getUsername())
+								&& existingUser.getPassword().equals(user.getPassword())) {
 							passwordsMatch = true;
 						} else {
 							passwordsMatch = false;
