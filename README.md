@@ -3,13 +3,18 @@
 A simple chat application built on Java Spark Framework
 
 ## Frameworks
+
 * Java Spark
 * Freemarker Templates
 * Google Gson
 
+## Data Persistence
+
+Java file services
+
 ## Usage
 
-### Install dependencies
+### Install Dependencies
 
 mvn clean install
 
